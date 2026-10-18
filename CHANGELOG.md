@@ -7,6 +7,8 @@ once it reaches 1.0.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-18
+
 ### Added
 
 - Engine core with no web or storage dependencies: thread, comment, claim and
@@ -28,3 +30,6 @@ once it reaches 1.0.
   seed script and the API. CI runs ruff and pytest via uv.
 - README, roadmap, system design, and ADRs 0001 (stack) and 0002
   (inspectable gate).
+
+[Unreleased]: https://github.com/plutado/noecho/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/plutado/noecho/releases/tag/v0.1.0
