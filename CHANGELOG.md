@@ -7,6 +7,18 @@ once it reaches 1.0.
 
 ## [Unreleased]
 
+### Added
+
+- Labeled pair format (JSONL) and validating loader for gate evaluation, in
+  `noecho.eval.pairs`.
+- `noecho-eval` command: precision, recall and F1 at a threshold (default
+  from config), score summaries per label and per topic, misclassified
+  pairs, and with `--sweep` a threshold table and per-label ASCII score
+  histograms.
+- Starter corpus of 46 invented labeled pairs across four topics in
+  `evals/pairs.jsonl`. This is a starting point, not the 300-pair corpus the
+  roadmap calls for.
+
 ## [0.1.0] - 2026-10-18
 
 ### Added

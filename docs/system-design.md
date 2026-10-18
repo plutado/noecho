@@ -179,6 +179,13 @@ harness (Milestone 1) is the prerequisite for changing it with confidence.
 side across the threshold or shrinks the margin below 0.02, so regressions
 are visible.
 
+`noecho-eval` (see the README) now measures the gate against labeled pairs.
+On the 46-pair starter corpus in `evals/pairs.jsonl`, 0.45 gives precision
+0.875 and recall 0.636. Five of the six honest-convergence duplicates are
+missed (they share few words with the original), and two "same fact, new
+implication" points score within 0.01 of the threshold. The corpus is too
+small to justify moving the threshold; the 300-pair corpus is still to do.
+
 Tuning principles:
 
 - **Prefer false accepts to false blocks.** A missed echo costs readers a few

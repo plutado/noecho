@@ -7,8 +7,8 @@
 **Status: early development (0.1.0, unreleased).** The engine core, the
 uniqueness gate, the claim rules and a minimal HTTP API work and are tested.
 There is no frontend, no auth, no multi-tenant support and no LLM provider
-yet, and the gate threshold has not been measured against a labeled corpus.
-See [What's next](#whats-next) and [ROADMAP.md](ROADMAP.md).
+yet, and the gate threshold has only been measured against a small starter
+corpus (see [Evaluating the gate](#evaluating-the-gate)). See [What's next](#whats-next) and [ROADMAP.md](ROADMAP.md).
 
 No Echo is an open-source, self-hostable discussion engine in which a thread
 only accepts unique contributions. If a point has already been made, a new
@@ -190,6 +190,30 @@ after URL normalization, with status `409 Conflict`:
 {"error": "duplicate_citation", "detail": "this source is already attached to the claim"}
 ```
 
+## Evaluating the gate
+
+`noecho-eval` runs the gate's similarity backend over a JSONL file of labeled
+pairs (existing thread comments, a candidate, and a `duplicate` or `new`
+label) and reports precision, recall and F1 with `duplicate` as the positive
+class, plus score summaries per label, per topic, and the misclassified
+pairs:
+
+```sh
+uv run noecho-eval                       # evals/pairs.jsonl at the configured threshold
+uv run noecho-eval --threshold 0.4       # try another threshold
+uv run noecho-eval --sweep               # add a threshold table and per-label score histograms
+uv run noecho-eval my-pairs.jsonl        # your own corpus
+```
+
+The record format is documented in `src/noecho/eval/pairs.py`. The shipped
+`evals/pairs.jsonl` is a **starter corpus** of 46 invented pairs across four
+topics, including honest convergence (labeled `duplicate`) and "same fact,
+new implication" restatements (labeled `new`). It is far too small to tune
+the threshold on; the 300-pair target in Milestone 1 is still open. At the
+default threshold of 0.45 the current lexical backend scores precision 0.875,
+recall 0.636, F1 0.737 on it. Most misses are reworded or independently
+reached repeats that share few words with the original.
+
 ## Tests and lint
 
 ```sh
@@ -205,7 +229,9 @@ src/noecho/core/      engine rules: text features, similarity, gate, claims, ord
 src/noecho/storage/   SQLite store
 src/noecho/service.py wires core to storage; the API calls only this
 src/noecho/api/       FastAPI app and schemas
+src/noecho/eval/      labeled pair format, metrics, noecho-eval command
 src/noecho/seed.py    invented sample data
+evals/                labeled pair corpus for noecho-eval
 docs/                 system design, architecture decision records, images
 ```
 

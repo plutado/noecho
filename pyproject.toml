@@ -17,6 +17,7 @@ Repository = "https://github.com/plutado/noecho"
 
 [project.scripts]
 noecho-seed = "noecho.seed:main"
+noecho-eval = "noecho.eval.cli:entrypoint"
 
 [dependency-groups]
 dev = [

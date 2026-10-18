@@ -23,12 +23,14 @@ Total estimate: **about 112 hours** across milestones 1 to 10.
 The threshold is the most consequential setting in the system. It needs
 measurement before it is changed again.
 
-- [ ] Labeled pair format (JSONL: thread context, candidate, label, note) and loader (2 h)
+- [x] Labeled pair format (JSONL: thread context, candidate, label, note) and loader (2 h)
 - [ ] Invented corpus of at least 300 labeled pairs across three or more topics,
-      including honest convergence and "same fact, new implication" cases (4 h)
-- [ ] `noecho-eval` command: precision, recall, F1, and the score
+      including honest convergence and "same fact, new implication" cases (4 h).
+      A 46-pair starter corpus across four topics is in `evals/pairs.jsonl`;
+      the 300-pair target is still open.
+- [x] `noecho-eval` command: precision, recall, F1, and the score
       distributions for each label at a given threshold (3 h)
-- [ ] Threshold sweep report (table and ASCII histogram) written to stdout (2 h)
+- [x] Threshold sweep report (table and ASCII histogram) written to stdout (2 h)
 - [ ] CI job that fails if F1 on the corpus drops by more than a set margin (1 h)
 
 ## Milestone 2: Adversarial rewording probes (~8 h)
